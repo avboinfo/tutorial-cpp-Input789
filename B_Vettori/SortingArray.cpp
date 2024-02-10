@@ -1,21 +1,17 @@
-/*
-* Legge da un file di input un vettore di stringhe
-* e produce un file di output con il vettore ordinato
-* Sandro Gallo - 5/2/2024
-*/
-
 #include <iostream>
 #include <fstream>
 
 using namespace std;
 
-const string FILENAME = "SortingArray.txt";
+
+int p = 0;
+/*const string FILENAME = "SortingArray.txt";
 
 void stampaVettore( string v[], int l ) {
     cout << endl;
     for (int i=0; i<l; i++) cout << v[i] << "\n";
     cout << endl;
-}
+}*/
 
 int bubbleSort( string v[], int l ) {
     int numOp = 0;
@@ -36,7 +32,7 @@ int bubbleSort( string v[], int l ) {
     return numOp;
 }
 
-int main()
+/*int main()
 {
     ifstream f;
     f.open(FILENAME);
@@ -58,6 +54,120 @@ int main()
     int x = bubbleSort(vs, n);
     cout << "Eseguiti " << x << " confronti." << endl;
     stampaVettore(vs, n);
+
+    return 0;
+}
+*/
+
+void printArray(string array[], int N){
+    for (int i = 0; i<N; i++){
+        cout<<array[i]<<endl;
+    }
+}
+
+/*void quickSort(string array[], int N){
+    int n = N / 2;
+    for (int i = 0; i<N; i++){
+        if (array[i] > array[n]){
+            array[n + i] = array [i];
+        }
+        else if (array[i] < array[n]){
+            array[n - i] = array [i];
+        }
+        else (array[i] == array[n]){
+            array [n + 1] = array [i];
+        }
+    }
+    
+}*/
+
+void swap(string array[] , int pos1, int pos2){
+	string temp;
+	temp = array[pos1];
+	array[pos1] = array[pos2];
+	array[pos2] = temp;
+    p++;
+}
+
+int partition(string array[], int low, int high, string pivot){
+	int i = low;
+	int j = low;
+	while( i <= high){
+		if(array[i] > pivot){
+			i++;
+		}
+		else{
+			swap(array,i,j);
+			i++;
+			j++;
+		}
+	}
+	return j-1;
+}
+
+void quickSort(string array[], int low, int high){
+	if(low < high){
+	string pivot = array[high];
+	int pos = partition(array, low, high, pivot);
+	
+	quickSort(array, low, pos-1);
+	quickSort(array, pos+1, high);
+	}
+}
+
+int main (){
+
+    // Dichiarazione file
+    ifstream Cont ("SortingArray.txt");
+
+    // Dichiarazione variabili
+    int N = 0;
+    string l;
+    int giusto = 0;
+    string scelta;
+
+    // While per prendere grandezza array
+    while (getline(Cont, l)){
+        N++;
+    }
+
+    // Dichiarazione vettore
+    string array[N];
+
+    // Nuova apertura file
+    ifstream file ("SortingArray.txt");
+
+    // For per mettere i numeri letti dal file in un vettore
+    for (int i=0; i<N; i++) getline( file, array[i] );
+
+    // Funzione per stampare il vettore
+    printArray(array, N);
+
+    // Ciclo iterativo
+    while (giusto == 0){
+        cout<<"Con quale algoritmo vuoi ordinare il vettore? Puoi scegliere tra BubbleSort (digita Bubble) e Quick Sort (digita Quick)"<<endl;
+        cin>>scelta;
+        if (scelta == "Bubble" || scelta =="bubble"){
+            p = bubbleSort (array, N);
+            giusto = 1;
+        }
+        else if (scelta == "Quick" || scelta == "quick"){
+            quickSort(array, 0 , N-1);
+            giusto = 1;
+        }
+        else {
+            cout<<"Non hai inserito nulla di valido"<<endl;
+        }
+    }
+
+    // Funzione per ordinare il vettore
+
+    cout<<endl;
+
+    // Funzione per stampare il vettore
+    printArray(array, N);
+
+    cout<<"eseguiti "<<p<< " scambi";
 
     return 0;
 }
