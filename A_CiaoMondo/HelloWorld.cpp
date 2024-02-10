@@ -1,8 +1,3 @@
-/*
-** HelloWorld.cpp
-** Author: Sandro Gallo
-*/
-
 #include <iostream>
 
 using namespace std;
