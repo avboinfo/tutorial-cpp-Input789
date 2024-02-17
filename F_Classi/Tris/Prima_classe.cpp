@@ -36,12 +36,6 @@ class Tris_classe{
         void stampaGioco(){
                 for (int i = 0; i<L; i++){
                     for (int j = 0; j<L; j++){
-                        if (griglia[i][j] == "1"){
-                            griglia[i][j] = "X";
-                        }
-                        if (griglia[i][j] == "2"){
-                            griglia[i][j] = "O";
-                        }
                         cout<<griglia[i][j]<<"\t";
                     }
                     cout<<endl;
@@ -58,7 +52,7 @@ class Tris_classe{
             if (griglia[x][y] != "0"){ // Cella già occupata
                 return false;
             }
-            griglia[x][y] = "1";
+            griglia[x][y] = "X";
             return true;
 
 
@@ -74,8 +68,75 @@ class Tris_classe{
             if (griglia[x][y] != "0"){ // Cella già occupata
                 return false;
             }
-            griglia[x][y] = "2";
+            griglia[x][y] = "O";
             return true;
+        }
+
+        int vincenteGioco(){
+            int risultato;
+            for (int i = 0; i<L; i++){
+                risultato = controlla_colonna(i);
+                if (risultato != 0){
+                    return risultato;
+                }
+                risultato = controlla_riga(i);
+                if (risultato != 0){
+                    return risultato;
+                }
+            }
+        }
+    private:
+        int controlla_colonna(int colonna){
+            int uno = 0;
+            int due = 0;
+            for (int i = 0; i<L; i++){
+                string casella = griglia[i][colonna];
+                if (casella == "X"){
+                    uno++;
+                }
+                else if (casella == "O"){
+                    due++;
+                }
+            }
+            if (uno == 3){
+                return 1;
+            }
+            else if (due == 3){
+                return 2;
+            }
+            else{
+                return 0;
+            }
+
+        }
+
+        int controlla_riga(int riga){
+            int uno = 0;
+            int due = 0;
+            for (int i = 0; i<L; i++){
+                string casella = griglia[riga][i];
+                if (casella == "X"){
+                    uno++;
+                }
+                else if (casella == "O"){
+                    due++;
+                }
+            }
+            if (uno == 3){
+                return 1;
+            }
+            else if (due == 3){
+                return 2;
+            }
+            else{
+                return 0;
+            }
+
+        }
+    
+
+        int controlla_diagonale(){
+            return 0;
         }
 
 
@@ -94,12 +155,14 @@ int main(){
     Tris.stampaGioco();
 
     // Dichiarazione variabili
-    int x, y;
+    int x;
+    int y;
     bool valido;
-    bool end = true;
+    int end = 0;
+    int Cont = 0;
 
     // Gioco
-    while (end){
+    while (end == 0){
         do{ // Do while
         cout<<"Giocatore 1 tocca a te: valori da (da 0 a 2): "<<endl;
         cout<<"X: ";
@@ -111,16 +174,41 @@ int main(){
 
         Tris.stampaGioco();
 
+        end = Tris.vincenteGioco();
+        if (end!=0){
+            break;
+        }
+        Cont++;
+
         do{ // Do while
         cout<<"Giocatore 2 tocca a te: valori da (da 0 a 2): "<<endl;
-        cout<<"X: ";
-        cin>>x;
         cout<<"Y: ";
+        cin>>x;
+        cout<<"X: ";
         cin>>y;
         valido = Tris.piazzaO(x, y);
         } while (!valido);
 
         Tris.stampaGioco();
+
+        end = Tris.vincenteGioco();
+        if (end != 0){
+            break;
+        }
+        Cont++;
+        if (Cont >= 9){
+            break;
+        }
+    }
+
+    if (end == 1){
+        cout<<"Giocatore 1 hai vinto";
+    }
+    else if (end == 2){
+        cout<<"Giocatore 2 hai vinto";
+    }
+    else {
+        cout<<"Pareggio";
     }
 
     return 0;
