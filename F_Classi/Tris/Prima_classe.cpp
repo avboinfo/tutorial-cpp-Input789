@@ -49,10 +49,10 @@ class Tris_classe{
             if (y > 2 || y < 0){ // Oltre i valori possibili
                 return false;
             }
-            if (griglia[x][y] != "0"){ // Cella già occupata
+            if (griglia[y][x] != "0"){ // Cella già occupata
                 return false;
             }
-            griglia[x][y] = "X";
+            griglia[y][x] = "X";
             return true;
 
 
@@ -63,16 +63,18 @@ class Tris_classe{
                 return false;
             }
             if (y > 2 || y < 0){ // Oltre i valori possibili
+                return false;  
+            }
+            if (griglia[y][x] != "0"){ // Cella già occupata
                 return false;
             }
-            if (griglia[x][y] != "0"){ // Cella già occupata
-                return false;
-            }
-            griglia[x][y] = "O";
+            griglia[y][x] = "O";
             return true;
         }
 
-        int vincenteGioco(){
+        int vincenteGioco(int x, int y){
+            int primo = x;
+            int secondo = y;
             int risultato;
             for (int i = 0; i<L; i++){
                 risultato = controlla_colonna(i);
@@ -83,6 +85,7 @@ class Tris_classe{
                 if (risultato != 0){
                     return risultato;
                 }
+                risultato = controlla_diagonale(x, y)
             }
         }
     private:
@@ -135,7 +138,16 @@ class Tris_classe{
         }
     
 
-        int controlla_diagonale(){
+        int controlla_diagonale(int x, int y){
+            string casella = griglia[x][y];
+            for (int i = 0; i<L; i++){
+                if ((casella[0][0]=="X" && casella[1][1]="X" && casella[2][2]="X") || (casella[2][0]=="X" && casella[1][1]="X" && casella[0][2]="X")){
+                    return 1;
+                }
+                if ((casella[0][0]=="O" && casella[1][1]="O" && casella[2][2]="O") || (casella[2][0]=="O" && casella[1][1]="O" && casella[0][2]="O")){
+                    return 2;
+                }
+            }
             return 0;
         }
 
@@ -174,7 +186,7 @@ int main(){
 
         Tris.stampaGioco();
 
-        end = Tris.vincenteGioco();
+        end = Tris.vincenteGioco(x, y);
         if (end!=0){
             break;
         }
@@ -191,7 +203,7 @@ int main(){
 
         Tris.stampaGioco();
 
-        end = Tris.vincenteGioco();
+        end = Tris.vincenteGioco(x, y);
         if (end != 0){
             break;
         }
