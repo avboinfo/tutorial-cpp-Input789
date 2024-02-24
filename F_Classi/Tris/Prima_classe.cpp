@@ -86,6 +86,9 @@ class Tris_classe{
                     return risultato;
                 }
                 risultato = controlla_diagonale(x, y);
+                if (risultato != 0){
+                    return risultato;
+                }
             }
         }
     private:
@@ -139,12 +142,11 @@ class Tris_classe{
     
 
         int controlla_diagonale(int x, int y){
-            string casella = griglia[x][y];
             for (int i = 0; i<L; i++){
-                if ((casella[0][0]=="X" && casella[1][1]=="X" && casella[2][2]=="X") || (casella[2][0]=="X" && casella[1][1]=="X" && casella[0][2]=="X")){
+                if ((griglia[0][0] == "X" && griglia[1][1]=="X" && griglia[2][2]=="X") || (griglia[2][0]=="X" && griglia[1][1]=="X" && griglia[0][2]=="X")){
                     return 1;
                 }
-                if ((casella[0][0]=="O" && casella[1][1]=="O" && casella[2][2]=="O") || (casella[2][0]=="O" && casella[1][1]=="O" && casella[0][2]=="O")){
+                if ((griglia[0][0]=="O" && griglia[1][1]=="O" && griglia[2][2]=="O") || (griglia[2][0]=="O" && griglia[1][1]=="O" && griglia[0][2]=="O")){
                     return 2;
                 }
             }
@@ -172,9 +174,10 @@ int main(){
     bool valido;
     int end = 0;
     int Cont = 0;
+    int b = 1;
 
     // Gioco
-    while (end == 0){
+    while (end == 0 && b != 0){
         do{ // Do while
         cout<<"Giocatore 1 tocca a te: valori da (da 0 a 2): "<<endl;
         cout<<"X: ";
@@ -205,11 +208,11 @@ int main(){
 
         end = Tris.vincenteGioco(x, y);
         if (end != 0){
-            break;
+            b=0;
         }
         Cont++;
         if (Cont >= 9){
-            break;
+            b=0;
         }
     }
 
