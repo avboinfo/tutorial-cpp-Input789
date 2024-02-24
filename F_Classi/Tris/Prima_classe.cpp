@@ -36,7 +36,7 @@ class Tris_classe{
         void stampaGioco(){
                 for (int i = 0; i<L; i++){
                     for (int j = 0; j<L; j++){
-                        cout<<griglia[i][j]<<"\t";
+                        cout<<"["<<griglia[i][j]<<"]"<<"\t";
                     }
                     cout<<endl;
                 }
@@ -174,10 +174,9 @@ int main(){
     bool valido;
     int end = 0;
     int Cont = 0;
-    int b = 1;
 
     // Gioco
-    while (end == 0 && b != 0){
+    while (end == 0){
         do{ // Do while
         cout<<"Giocatore 1 tocca a te: valori da (da 0 a 2): "<<endl;
         cout<<"X: ";
@@ -194,6 +193,9 @@ int main(){
             break;
         }
         Cont++;
+        if (Cont >= 9){
+            break;
+        }
 
         do{ // Do while
         cout<<"Giocatore 2 tocca a te: valori da (da 0 a 2): "<<endl;
@@ -208,11 +210,11 @@ int main(){
 
         end = Tris.vincenteGioco(x, y);
         if (end != 0){
-            b=0;
+            break;
         }
         Cont++;
         if (Cont >= 9){
-            b=0;
+            break;
         }
     }
 
