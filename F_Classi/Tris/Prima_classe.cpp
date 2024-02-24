@@ -34,11 +34,17 @@ class Tris_classe{
         }*/
 
         void stampaGioco(){
+            int stampa = 0;
                 for (int i = 0; i<L; i++){
+                    stampa ++;
                     for (int j = 0; j<L; j++){
-                        cout<<"["<<griglia[i][j]<<"]"<<"\t";
+                        cout<<griglia[i][j]<<"\t";
+                        cout<<"|"<<"\t";
                     }
                     cout<<endl;
+                    if (stampa == 1 || stampa == 2){
+                        cout<<"-----------------------------------------"<<"\t"<<endl;
+                    }
                 }
             }
 
