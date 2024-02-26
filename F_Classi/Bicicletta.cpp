@@ -13,6 +13,10 @@ class Bicicletta {
         raggio=r;
         colore=c;
     }
+    Bicicletta() {
+        raggio=12;
+        colore="colore";
+    }
     void presentati() {
         cout << "Buongiorno, sono una bici di colore " << colore << " e con le ruote " << raggio << "!" << endl;
     }
@@ -21,7 +25,7 @@ class Bicicletta {
 int main()
 {
     Bicicletta x(16,"verdino");
-    Bicicletta y(14,"rossastro");
+    Bicicletta y;
 
     x.presentati();
     y.presentati();
