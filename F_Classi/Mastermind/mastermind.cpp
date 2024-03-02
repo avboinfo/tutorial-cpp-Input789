@@ -76,6 +76,7 @@ class mastermind{
         }
 
         void moveResult(){
+            std::cout<<scheme<<std::endl;
             int ball = 0;
             int strike = 0;
             int last_try = 0;
@@ -83,7 +84,14 @@ class mastermind{
                 if (last_shot[i] == scheme[i]){
                     strike++;
                 }
-                
+                else{
+                    last_try = last_shot[i];
+                    for (int i = 1; i<L; i++){
+                        if (last_try == last_shot[i]){
+                            ball++;
+                        }
+                    }
+                }
 
             }
             std::cout<<"Strike/s: "<<strike<<std::endl;
