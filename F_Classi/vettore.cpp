@@ -9,18 +9,31 @@ using namespace std;
 
 class vettore{
     protected:
-        int L, len;
+        int L, len, D;
         int * array;
 
     public:
-        vettore(int l){
+        vettore(int l, int D){
             L = l;
             len = 0;
             array = new int (L);
+            D = 10;
 
         }
         void add (int N){
-            if (len == L){ cout<<"Il vettore è pieno, con: ["<<L<<"] numeri"; return;}
+            if (len == L){ 
+                cout<<""<<L<<" --> "<<D<<""<<endl;
+                int * newa = new int (L + D);
+                for (int i = 0; i<L; i++){
+                    newa[i] = array[i];
+                    array = newa;
+                    delete[] array;
+
+                }
+                L = L + D;
+                cout<<"Il vettore è pieno, con: ["<<L<<"] numeri"; 
+                return;
+                }
             array[len] = N;
             len++;
         }
@@ -33,7 +46,7 @@ class vettore{
 
 int main(){
 
-    vettore array(100);
+    vettore array(100, 50);
 
     array.add(2);
     array.add(4);
