@@ -17,6 +17,7 @@ Galdini Matteo 02/03/2024*/
 
     //start.startGame();
 
+    first.generateScheme();
     first.newShot();
     first.moveResult();
 
