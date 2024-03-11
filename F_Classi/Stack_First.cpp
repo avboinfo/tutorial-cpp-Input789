@@ -1,4 +1,4 @@
-/*Classi e vettori
+/*First Stack
 GALDINI MATTEO 3CIN 04/03/2024
 */
 
@@ -7,20 +7,20 @@ GALDINI MATTEO 3CIN 04/03/2024
 using namespace std;
 
 
-class vettore{
+class stack{
     protected:
         int L, len, D;
 
     public:
         int * array;
-        vettore(int l, int D){
+        stack(int l, int D){
             this-> L = L;
             this->D = D;
             len = 0;
             array = new int (L);
 
         }
-        void add (int N){
+        void push (int N){
             if (len == L){ 
                 cout<<""<<L<<" --> "<<L + D<<""<<endl;
                 int * newa = new int [L + D];
@@ -35,6 +35,14 @@ class vettore{
             len++;
         }
 
+        int pop(){
+            if (len == 0) {
+                cout<<"Stack vuoto"<<endl; 
+                return 1;
+            }
+            return array[--len];
+        }
+
         void setElement(int index, int element){
             array[index] = element;;
         }
@@ -46,26 +54,23 @@ class vettore{
         void print(){
             cout<<"Vettore: ";
             for (int i = 0; i<len; i++){
-                cout<<"Vettore: ["<<array[i]<<"]"<<endl;
+                cout<<array[i]<<"\t"<<" ";
             }
+            cout<<endl;
         }
 };
 
 int main(){
-
-    vettore array(10, 2);
-
-    /*array.add(2);
-    array.add(4);
-    array.print();*/
-
+    stack array (10, 10);
     for (int i = 0; i<100; i++){
-        array.add(i);
+        array.push(i);
     }
+    for (int i = 0; i<101; i++){
+        cout<<array.pop()<<" ";
+    }
+    cout<<endl;
 
-    array.array[10] = 333;
-
-    array.print();
+    //array.print();
 
     return 0;
 }
