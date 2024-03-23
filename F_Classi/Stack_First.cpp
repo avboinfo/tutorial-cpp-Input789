@@ -66,7 +66,7 @@ int main(){
         array.push(i);
     }
     for (int i = 0; i<101; i++){
-        cout<<array.pop()<<" ";
+        cout<<array.pop()<<"\t"<<" ";
     }
     cout<<endl;
 
