@@ -13,14 +13,21 @@ Galdini Matteo 02/03/2024*/
  int main(){
 
     mastermind first = mastermind();
+    int game = 0;
     //mastermind start = mastermind();
 
     //start.startGame();
 
     first.generateScheme();
-    first.newShot();
-    first.moveResult();
+    while (game != 9){
+      first.newShot();
+      first.moveResult();
+      first.printScheme();
+      int end = first.Continue();
+      game == end;
+    }
 
+    first.checkLoss();
 
 
     return 0;

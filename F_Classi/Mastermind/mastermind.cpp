@@ -18,7 +18,12 @@ class mastermind{
         std::string last_shot;
 
         static const int L = 5;
+        static const int MAX = 9;
+        int Checknumber = 0;
         int valid_move[L];
+
+        int ball = 0;
+        int strike = 0;
 
         int scheme [L];
 
@@ -75,28 +80,57 @@ class mastermind{
 
         }
 
-        void moveResult(){
-            std::cout<<scheme<<std::endl;
-            int ball = 0;
-            int strike = 0;
-            int last_try = 0;
+        int moveResult(){
+            int win = 0;
+            int end = 0;
+            int private_scheme[L];
             for (int i = 0; i<L; i++){
-                if (last_shot[i] == scheme[i]){
-                    strike++;
-                }
-                else{
-                    last_try = last_shot[i];
-                    for (int i = 1; i<L; i++){
-                        if (last_try == last_shot[i]){
+                private_scheme[i] = valid_move[i];
+            }
+            for (int i = 0; i<L; i++){
+                for (int j = 0; j<L; j++){
+                    if (valid_move[i] == scheme[j]){
+                        if (i==j){
+                            strike++;
+                        }
+                        else{
                             ball++;
                         }
+                        private_scheme[j] = -2;
                     }
                 }
 
             }
             std::cout<<"Strike/s: "<<strike<<std::endl;
             std::cout<<"Ball/s: "<<ball<<std::endl;
+            if (strike == 5){
+                std::cout<<"You've won";
+                end = 9;
+            }
+            strike = 0;
+            ball = 0;
+            end++;
+            return end;
 
+        }
+
+        void checkWin(){
+            int win = moveResult();
+            if (win == 1){
+                std::cout<<"You've won";
+            }
+        }
+
+        int Continue(){
+            int end = moveResult();
+            return end;
+        }
+
+        void checkLoss(){
+            int win = moveResult();
+            if (win==0){
+                std::cout<<"You've lost";
+            }
         }
 
         void generateScheme(){
@@ -104,6 +138,20 @@ class mastermind{
             for (int i = 0; i<L; i++){
                 scheme[i]=rand()%10;
             }
+            /* Check again later on
+            for (int i = 0; i<10; i++){
+                if (i == scheme[i]){
+                    Checknumber = 2;
+                }
+            }
+            */
+        }
+
+        void printScheme(){
+            for (int i = 0; i<L; i++){
+                std::cout<<scheme[i];
+            }
+            std::cout<<std::endl;
         }
 
         /*mastermind::mastermind(){
