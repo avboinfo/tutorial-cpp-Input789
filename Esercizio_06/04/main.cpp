@@ -18,7 +18,8 @@ int main(){
     int i_finanze = 1;
     int i_spedizioni = 1; 
     int i_ricezioni = 1;
-    int i_primario = 10;
+    int i_primario = 1;
+    string s_primario = "NO";
 
 
     while(end != 1){
@@ -50,13 +51,13 @@ int main(){
         if (c == 2){
             cout<<"Premere F per vedere il prossimo da chiamare nella coda finanze, S per il prossimo da chiamare nella coda spedizioni e R per il prossimo da chiamare nella coda ricezioni: ";
             cin>>s;
-            prova.Exit(s);
+            prova.Exit(s, s_primario);
             cout<<"Premere [1] per uscire o qualsiasi altro numero per continuare: ";
             cin>>end;
             cout<<endl;
-        }
+        } 
         if (c == 3){
-            cout<<"Premere F per vedere la coda finanze, S per la coda spedizioni e R per la coda ricezioni";
+            cout<<"Premere F per vedere la coda finanze, S per la coda spedizioni e R per la coda ricezioni: ";
             cin>>s;
             prova.print(s);
             cout<<"Premere [1] per uscire o qualsiasi altro numero per continuare: ";
@@ -64,10 +65,8 @@ int main(){
             cout<<endl;
         }
         if (c == 4){
-            cout<<"Sei nella lista primaria per F, finanze"<<endl;
-            s = "FP";
-            prova.Exit(s);
-            i_primario++;
+            cout<<"Sei nella lista primaria, hai la precedenza, sei il numero "<<i_primario<<endl;
+            cout<<"Il prossimo numero nella lista finanze è: "<<i_primario<<endl;
         }
     }
 

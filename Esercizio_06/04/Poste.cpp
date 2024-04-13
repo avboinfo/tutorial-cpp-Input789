@@ -56,13 +56,10 @@ class Poste{
             ricezioni[last_ricezioni] = n;
             last_ricezioni++;
         }
-        if (s == "FP"){
-            cout<<"Sei nella lista primaria"<<endl;
-        }
     }
 
 
-    int Exit(string s){
+    int Exit(string s, string s_primario){
         if (s == "F"){
             if (first_finanze >= last_finanze){
                 cout<<"Non c'è nulla";
@@ -78,6 +75,7 @@ class Poste{
                 return 0;
             }
             cout<<"Il prossimo è: "<<spedizioni[first_spedizioni]<<endl;
+            first_spedizioni++;
             return spedizioni[first_spedizioni + 1];
         }
         if (s == "R"){
@@ -86,16 +84,17 @@ class Poste{
                 return 0;
             }
             cout<<"Il prossimo è: "<<ricezioni[first_ricezioni]<<endl;
+            first_ricezioni++;
             return ricezioni[first_ricezioni + 1];
         }
-        if (s == "RP"){
+        /*if (s == "RP"){
             if (first_primario >= last_primario){
                 cout<<"Non c'è nulla";
                 return 0;
             }
             cout<<"Il prossimo è: "<<primario[first_primario]<<endl;
-            return primario[primario + 1];
-        }
+            return primario[first_primario + 1];
+        }*/
     }
 
 
