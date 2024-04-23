@@ -1,22 +1,17 @@
 /*
-** BattleField.cpp una classe definita da noi che spupazza le matrici come nessuno mai
-** Sandro Gallo - 15/04/2024
+** BattleField.cpp una classe che gestisce una matrice quadrata come campo di battaglia
+** Sandro Gallo - 20/04/2024
 */
 
 #include <iostream>
 using namespace std;
 
-const int DIM = 10;
-
-const char SHIP = 'X'; //Definisce parte di nave
-
-const char NOTS = '-'; //Definisce parte di nave non colpita
-
-const char S = '*'; //Definisce parte di nave colpita
-
-const char NOTHING = '.'; //Definisce parte di campo senza nave
-
-
+// DIM, SHIP, MISS, HIT, VOID
+const int DIM = 6;
+const char SHIP = 'X';
+const char MISS = '.';
+const char HIT = '*';
+const char VOID = '-';
 
 class BattleField {
 
@@ -45,10 +40,14 @@ class BattleField {
     }
 
     void stampa() {
+        int n = 1;
         cout << endl << " ------------------------------------------------------ " << endl;
+        cout<<"0123456"<<endl;
         for (int i=0; i<DIM; i++) {
+            cout<<n;
+            n++;
             for (int j=0; j<DIM; j++) {
-                printf("%c ", m[i][j]);
+                cout<<m[i][j];
             }
             cout << endl;
         }
@@ -58,7 +57,7 @@ class BattleField {
     void bomb() {
         int x = rand() % DIM;
         int y = rand() % DIM;
-        m[x][y] = S;
+        m[x][y] = '*';
     }
 
     void placeHorizontalShip(int len) {
