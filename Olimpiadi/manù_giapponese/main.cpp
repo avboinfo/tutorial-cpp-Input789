@@ -20,9 +20,9 @@ int main() {
     cin>>N;
     cin>>B;
     vector <int> A(N);
+    vector <int> C(N);
     for (int i = 0; i<N; i++){
         cin>>A[i];
-        if (A[i] > B) A[i] = 0;
     }
     sort(A.begin(), A.end(), greater<int>());
     int max = 0;
@@ -34,11 +34,17 @@ int main() {
         if (max <= B) good = true;
         
     }*/
-    for (int i = 1; i<N; i++){
-        if ((A[0] + A[i]) <= B ){
-            cout<<A[0]<<endl<<A[i]<<endl;
-            i = N;
+    int s = 0;
+    int result1, result2 = 0;
+    for (int i = 0; i<N; i++){
+        for (int j = i + 1; j<N; j++){
+            if (s <A[i] + A[j] && A[i] + A[j] <= B){
+                s = A[i] + A[j];
+                result1 = i;
+                result2 = j;
+            }
         }
     }
+    cout<<A[result1]<<endl<<A[result2]<<endl;
     return 0;
 }
